@@ -30,6 +30,17 @@ const getSparkleLayer = () =>
 const getBellLayer = () =>
   note("~ c7 ~ e7 ~ g7 ~ b7").s("bell").room(0.7).gain(0.2).mask("0 0 1 1");
 
-stack(getBassLayer(), getThemeLayer(), getSparkleLayer(), getBellLayer()).cpm(
-  config.tempo
-);
+const getTickingLayer = () =>
+  s("hat")
+    .hpf(8000)
+    .gain(0.5)
+    .mask("0 0 0 1")
+    .every(2, (x: any) => x.ply(4));
+
+stack(
+  getBassLayer(),
+  getThemeLayer(),
+  getSparkleLayer(),
+  getBellLayer(),
+  getTickingLayer()
+).cpm(config.tempo);
