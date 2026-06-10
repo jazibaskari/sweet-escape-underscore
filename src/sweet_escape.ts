@@ -20,4 +20,16 @@ const getThemeLayer = () =>
     .s("kalimba")
     .gain(config.globalGain);
 
-stack(getBassLayer(), getThemeLayer()).cpm(config.tempo);
+const getSparkleLayer = () =>
+  note("<[c6 e6 g6 e6] [b5 d6 g6 d6] [a5 c6 e6 c6] [f5 a5 c6 a5]>")
+    .s("kalimba")
+    .room(0.5)
+    .gain(0.3)
+    .mask("0 0 0 0 1 1 1 1");
+
+const getBellLayer = () =>
+  note("~ c7 ~ e7 ~ g7 ~ b7").s("bell").room(0.7).gain(0.2).mask("0 0 1 1");
+
+stack(getBassLayer(), getThemeLayer(), getSparkleLayer(), getBellLayer()).cpm(
+  config.tempo
+);
